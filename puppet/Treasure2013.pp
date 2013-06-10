@@ -1,0 +1,191 @@
+yumrepo { 'remi':
+descr => 'remi repo',
+mirrorlist => 'http://rpms.famillecollet.com/enterprise/6/remi/mirror',
+  enabled    => 1,
+  gpgcheck   => 1,
+  gpgkey     => 'http://rpms.famillecollet.com/RPM-GPG-KEY-remi',
+}
+
+package{
+[
+'openssh-clients',
+'wget',
+'screen',
+'unzip',
+'make',
+'git',
+'php',
+'php-cli',
+'php-pecl-apc',
+'php-common',
+'php-devel',
+'php-gd',
+'php-pdo',
+'php-pear',
+'php-xml',
+'php-mbstring',
+'php-mysql',
+'mysql',
+'mysql-server',
+'mysql-devel',
+'httpd',
+]:
+provider => 'yum',
+ensure => installed,
+require => Yumrepo['remi'],
+}
+
+service{ 'httpd':
+enable => true,
+ensure => running,
+hasrestart => true,
+require => Package['httpd']
+}
+
+file { "/var/lib/mysql/my.cnf":
+owner => "mysql", group => "mysql",
+source => "/vagrant/puppet/my.cnf",
+notify => Service["mysqld"],
+require => Package["mysql-server"],
+}
+
+file { "/etc/my.cnf":
+ensure => "/var/lib/mysql/my.cnf",
+require => File["/var/lib/mysql/my.cnf"],
+}
+
+service{ 'mysqld':
+enable => true,
+ensure => running,
+hasrestart => true,
+require => File['/etc/my.cnf']
+}
+
+exec { "create-demo-db":
+unless => "/usr/bin/mysql -uroot -e \"create database groupwork; grant all on groupwork.* to demouser@localhost identified by 'demopass';\"",
+command => "/usr/bin/mysql -uroot -e \"create database groupwork; grant all on groupwork.* to demouser@localhost identified by 'demopass';\"",
+require => Service["mysqld"],
+}
+
+exec { "pear" :
+  user => 'root',
+  cwd => '/',
+  path => ['/usr/bin'],
+  command => "pear channel-discover pear.phpunit.de",
+  require => [Package[
+'php',
+'php-cli',
+'php-pecl-apc',
+'php-common',
+'php-devel',
+'php-gd',
+'php-pdo',
+'php-pear',
+'php-xml',
+'php-mbstring',
+'php-mysql']],
+}
+exec { "pear 2" :
+  user => 'root',
+  cwd => '/',
+  path => ['/usr/bin'],
+  command => "pear channel-discover components.ez.no",
+  require => Exec['pear']
+}
+exec { "pear 3" :
+  user => 'root',
+  cwd => '/',
+  path => ['/usr/bin'],
+  command => "pear channel-discover pear.symfony-project.com",
+  require => Exec['pear 2']
+}
+exec { "pear 4" :
+  user => 'root',
+  cwd => '/',
+  path => ['/usr/bin'],
+  command => "pear channel-discover pear.symfony.com",
+  require => Exec['pear 3']
+}
+
+exec { "pear 5" :
+  user => 'root',
+  cwd => '/',
+  path => ['/usr/bin'],
+  command => "pear install channel://pear.symfony.com/Yaml",
+  require => Exec['pear 4']
+}
+
+exec {"pear install phpunit":
+  user => 'root',
+  cwd => '/',
+  path => ['/usr/bin'],
+  command => "/usr/bin/pear install phpunit/PHPUnit",
+  timeout => 999,
+  require => Exec['pear 5'],
+}
+
+
+exec { "testrunner" :
+  user => 'root',
+  path => ['/usr/bin'],
+  command => "pear channel-discover pear.piece-framework.com",
+  timeout => 999,
+  require => Exec['pear install phpunit'],
+}
+
+exec { "testrunner 2" :
+  user => 'root',
+  path => ['/usr/bin'],
+  command => "pear install piece/stagehand_testrunner",
+  timeout => 999,
+  require => [Exec['testrunner']],
+}
+
+
+group { 'demogroup':
+ensure => present,
+gid => 505,
+require => [Exec['testrunner 2']],
+}
+
+user { 'demouser':
+ensure => present,
+gid => 'demogroup',
+comment => 'demouser',
+home => '/home/demouser',
+managehome => true,
+shell => '/bin/bash',
+require => Group["demogroup"]
+}
+
+file { '/home/demouser/.ssh':
+ensure => directory,
+owner => 'demouser',
+group => 'demogroup',
+mode => '0700',
+require => User["demouser"]
+}
+
+exec { "chmod" :
+  user => 'root',
+  path => ['/bin'],
+  command => "chmod 755 /home/demouser",
+  timeout => 999,
+  require => File['/home/demouser/.ssh']
+}
+
+file { "/etc/sysconfig/iptables":
+owner => "root", group => "root",
+source => "/vagrant/puppet/iptables",
+mode => 600,
+notify => Service['iptables'],
+require => Exec['chmod']
+}
+
+service{ 'iptables':
+enable => true,
+ensure => running,
+hasrestart => true,
+require => File['/etc/sysconfig/iptables'],
+subscribe => File['/etc/sysconfig/iptables'],
+}
