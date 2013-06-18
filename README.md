@@ -1,7 +1,7 @@
 Treasure2013用環境
 ===================================
 
-## 環境攻勢
+## 環境構成
 VirtualBox
 Vagrant
 Puppet
@@ -24,8 +24,8 @@ git clone後ホストターミナルから
 
 ## 環境説明
 IPは192.168.56.110で固定で設定  
-rootにはvagrantユーザから「sudo su -」で変更可能 
-アプリケーションユーザはdemouserを作成済み 
-mysqlはmy.cnfを設定済み 
-iptablesでport80は解放済み 
+rootにはvagrantユーザから「sudo su -」で変更可能  
+アプリケーションユーザはdemouserを作成済み  
+mysqlはmy.cnfを設定済み  
+iptablesでport80は解放済み   
 
