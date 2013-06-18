@@ -10,17 +10,17 @@ macにて動作確認
 
 ## 構築
 git clone後ホストターミナルから
-	cd Vagrant  
-	vagrant up  
+    cd Vagrant   
+    vagrant up  
 ゲストOSへログイン
-	vagrant ssh  
-	cd /vagrant/puppet  
-	sudo puppet apply Treasure2013.pp  
+    vagrant ssh  
+    cd /vagrant/puppet  
+    sudo puppet apply Treasure2013.pp  
 
 
 ## 環境破棄
 再構築したい場合は下記コマンドで破棄後構築が可能
-	vagrant destroy  
+    vagrant destroy  
 
 ## 環境説明
 IPは192.168.56.110で固定で設定  
