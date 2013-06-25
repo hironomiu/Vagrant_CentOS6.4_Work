@@ -14,6 +14,7 @@ package{
 'unzip',
 'make',
 'git',
+'ruby-shadow',
 'php',
 'php-cli',
 'php-pecl-apc',
@@ -196,12 +197,20 @@ mode => '0700',
 require => User["demouser"]
 }
 
+exec { "passwd" :
+  user => 'root',
+  path => ['/bin/','/usr/bin'],
+  command => 'echo "demouser" | passwd --stdin demouser',
+  timeout => 999,
+  require => File['/home/demouser/.ssh']
+}
+
 exec { "chmod" :
   user => 'root',
   path => ['/bin'],
   command => "chmod 755 /home/demouser",
   timeout => 999,
-  require => File['/home/demouser/.ssh']
+  require => Exec['passwd']
 }
 
 file { "/etc/sysconfig/iptables":
