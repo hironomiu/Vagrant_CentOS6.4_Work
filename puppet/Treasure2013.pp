@@ -67,6 +67,36 @@ command => "/usr/bin/mysql -uroot -e \"create database groupwork; grant all on g
 require => Service["mysqld"],
 }
 
+exec { "drop-user-db1":
+unless => "/usr/bin/mysql -uroot -e \"drop user 'root'@'127.0.0.1';\"",
+command => "/usr/bin/mysql -uroot -e \"drop user 'root'@'127.0.0.1';\"",
+require => Exec["create-demo-db"],
+}
+
+exec { "drop-user-db2":
+unless => "/usr/bin/mysql -uroot -e \"drop user 'root'@'::1';\"",
+command => "/usr/bin/mysql -uroot -e \"drop user 'root'@'::1';\"",
+require => Exec["drop-user-db1"],
+}
+
+exec { "drop-user-db3":
+unless => "/usr/bin/mysql -uroot -e \"drop user ''@'localhost';\"",
+command => "/usr/bin/mysql -uroot -e \"drop user ''@'localhost';\"",
+require => Exec["drop-user-db2"],
+}
+
+exec { "drop-user-db4":
+unless => "/usr/bin/mysql -uroot -e \"drop user ''@'treasure2013.local';\"",
+command => "/usr/bin/mysql -uroot -e \"drop user ''@'treasure2013.local';\"",
+require => Exec["drop-user-db3"],
+}
+
+exec { "drop-user-db5":
+unless => "/usr/bin/mysql -uroot -e \"drop user 'root'@'treasure2013.local';\"",
+command => "/usr/bin/mysql -uroot -e \"drop user 'root'@'treasure2013.local';\"",
+require => Exec["drop-user-db4"],
+}
+
 exec { "pear" :
   user => 'root',
   cwd => '/',
