@@ -2,11 +2,13 @@ Treasure2013用環境
 ===================================
 
 ## 環境構成
-VirtualBox
-Vagrant
+### 前提環境
+VirtualBox  
+Vagrant  
+### 構成管理ツール（vagrant up時に組込み済）
 Puppet
 
-macにて動作確認
+macにて動作確認（winでも動作実績あり）
 
 ## 構築
 ### git clone後ホストターミナルから
@@ -23,10 +25,28 @@ macにて動作確認
     vagrant destroy  
 
 ## 環境説明
-IPは192.168.56.110で固定で設定  
+### VirtualBox
+#### インスタンス名
+treasure2013  
+#### ネットワーク設定
+##### アダプタ１
+NAT,ssh用にポートフォワーディングの設定あり  
+ホスト2222->ゲスト22
+#### アダプタ２
+192.168.56.110で設定
+### ゲストOS
+CentOS6.4
+#### ユーザ
 rootにはvagrantユーザから「sudo su -」で変更可能  
-アプリケーションユーザはdemouserを作成済み(現在はrootから遷移のみ可能)   
-mysqlはmy.cnfを自動起動＆設定済み  
-iptablesでport80は自動起動＆解放済み   
-httpdは自動起動は実施、httpd.confは未設定
+GroupWorkBase用にdemouserを作成済み(現在はrootから遷移のみ可能)
+#### パッケージ   
+##### mysql
+自動起動
+/var/lib/mysql/my.cnfに設定  
+##### iptables
+自動起動
+port22,80をallow
+##### httpd
+自動起動
+httpd.confは未設定
 
