@@ -8,17 +8,21 @@ Vagrant
 ### 構成管理ツール（vagrant up時に組込み済）
 Puppet
 
-macにて動作確認（winでも動作実績あり）
+### 動作確認
+macにて動作確認  
+（winで動作実績あり）
 
 ## 構築
-### git clone後ホストターミナルから
+### 当リポジトリをgit clone後ホストターミナルから
     cd Vagrant   
     vagrant up  
-### ゲストOSへログイン
-    vagrant ssh  
-    cd /vagrant/puppet  
-    sudo puppet apply Treasure2013.pp  
+上記でpuppetによるパッケージ、ユーザの作成まで完了する。
 
+## ゲストOSへログイン方法
+### vagrantを利用した方法
+    vagrant ssh
+### sshでdemouserにログイン
+    ssh demouser@192.168.56.110
 
 ## 環境破棄
 ### 再構築したい場合は下記コマンドで破棄後構築が可能
