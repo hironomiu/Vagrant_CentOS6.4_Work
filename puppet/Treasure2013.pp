@@ -14,7 +14,6 @@ package{
 'unzip',
 'make',
 'git',
-'ruby-shadow',
 'php',
 'php-cli',
 'php-pecl-apc',
