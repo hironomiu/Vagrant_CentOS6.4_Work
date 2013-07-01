@@ -227,12 +227,20 @@ exec { "chmod" :
   require => Service['sshd']
 }
 
+exec { "usermod apache" :
+  user => 'root',
+  path => ['/usr/sbin'],
+  command => "usermod -G demogroup apache",
+  timeout => 999,
+  require => Exec['chmod']
+}
+
 file { "/etc/sysconfig/iptables":
 owner => "root", group => "root",
 source => "/vagrant/puppet/iptables",
 mode => 600,
 notify => Service['iptables'],
-require => Exec['chmod']
+require => Exec['usermod apache']
 }
 
 service{ 'iptables':
