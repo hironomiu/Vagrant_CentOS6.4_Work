@@ -27,6 +27,11 @@ httpd mysqld iptables
   end
 end
 
+# ソケットチェック（mysql）
+describe file('/var/lib/mysql/mysql.sock') do
+  it { should be_socket }
+end
+
 # ポートチェック
 describe port(80) do
   it { should be_listening }
@@ -41,9 +46,18 @@ demouser apache
   end
 end
 
+# ホームディレクトリチェック
+describe user('root') do
+  it { should have_home_directory '/root' }
+end
+describe user('demouser') do
+  it { should have_home_directory '/home/demouser' }
+end
+ 
 # グループチェック
 describe user('apache') do
   it { should belong_to_group 'apache' }
+  it { should belong_to_group 'demogroup' }
 end
 describe user('demouser') do
   it { should belong_to_group 'demogroup' }
