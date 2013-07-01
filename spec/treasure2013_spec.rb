@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
 
+# リポジトリチェック
+describe yumrepo('remi') do
+  it { should exist }
+end
+
 # パッケージチェック（puppetで導入したpkgを記載）
 %w{
 openssh-clients wget screen unzip make git php php-cli
@@ -27,4 +32,20 @@ describe port(80) do
   it { should be_listening }
 end
 
+# ユーザチェック 
+%w{
+demouser apache
+}.each do |user|
+  describe user(user) do
+    it { should exist }
+  end
+end
+
+# グループチェック
+describe user('apache') do
+  it { should belong_to_group 'apache' }
+end
+describe user('demouser') do
+  it { should belong_to_group 'demogroup' }
+end
 
