@@ -32,9 +32,20 @@ describe file('/var/lib/mysql/mysql.sock') do
   it { should be_socket }
 end
 
+# ホストチェック
+describe host('treasure2013.local') do
+  it { should be_resolvable.by('hosts') }
+end
+
 # ポートチェック
 describe port(80) do
   it { should be_listening }
+end
+
+# iptablesチェック
+describe iptables do
+  it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT') }
+  it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT') }
 end
 
 # ユーザチェック 
