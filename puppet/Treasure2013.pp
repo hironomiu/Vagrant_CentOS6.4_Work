@@ -35,11 +35,27 @@ ensure => installed,
 require => Yumrepo['remi'],
 }
 
+
+file { "/etc/httpd/conf/httpd.conf":
+owner => "root", group => "root",
+source => "/vagrant/puppet/httpd.conf",
+notify => Service["httpd"],
+require => Package["httpd"],
+}
+
+
+file { "/etc/php.ini":
+owner => "root", group => "root",
+source => "/vagrant/puppet/php.ini",
+notify => Service["httpd"],
+require => File["/etc/httpd/conf/httpd.conf"],
+}
+
 service{ 'httpd':
 enable => true,
 ensure => running,
 hasrestart => true,
-require => Package['httpd']
+require => File['/etc/php.ini']
 }
 
 file { "/var/lib/mysql/my.cnf":
