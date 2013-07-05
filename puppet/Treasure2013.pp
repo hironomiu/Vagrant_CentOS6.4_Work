@@ -158,6 +158,7 @@ exec { "pear 5" :
   cwd => '/',
   path => ['/usr/bin'],
   command => "pear install channel://pear.symfony.com/Yaml",
+  timeout => 999,
   require => Exec['pear 4']
 }
 
