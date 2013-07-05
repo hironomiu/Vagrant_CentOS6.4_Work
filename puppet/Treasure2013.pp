@@ -36,19 +36,19 @@ require => Yumrepo['remi'],
 }
 
 
-file { "/etc/httpd/conf/httpd.conf":
-owner => "root", group => "root",
-source => "/vagrant/puppet/httpd.conf",
-notify => Service["httpd"],
-require => Package["httpd"],
+file { '/etc/httpd/conf/httpd.conf':
+owner => 'root', group => 'root',
+source => '/vagrant/puppet/httpd.conf',
+notify => Service['httpd'],
+require => Package['httpd'],
 }
 
 
-file { "/etc/php.ini":
-owner => "root", group => "root",
-source => "/vagrant/puppet/php.ini",
-notify => Service["httpd"],
-require => File["/etc/httpd/conf/httpd.conf"],
+file { '/etc/php.ini':
+owner => 'root', group => 'root',
+source => '/vagrant/puppet/php.ini',
+notify => Service['httpd'],
+require => File['/etc/httpd/conf/httpd.conf'],
 }
 
 service{ 'httpd':
