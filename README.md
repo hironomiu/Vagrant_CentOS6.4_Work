@@ -50,7 +50,7 @@ CentOS6.4
 ##### 管理ユーザ（root）
 rootにはvagrantユーザから「sudo su -」で変更可能
 ##### 講義用ユーザ（demouser）  
-GroupWorkBase用にdemouserを作成済み(現在はrootから遷移のみ可能)
+GroupWorkBase用にdemouserを作成済み
 #### パッケージ   
 ##### mysql
 自動起動
