@@ -5,6 +5,6 @@ install:
 	$(VAGRANT) up
 destroy:
 	$(VAGRANT) destroy
-rspec:
+test:
 	$(RSPEC) spec/treasure2013_spec.rb
 	
