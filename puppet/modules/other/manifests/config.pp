@@ -3,6 +3,6 @@ class other::config{
     Class['httpd::service'] ~> Class['other::config']
     file { '/etc/httpd/conf/httpd.conf':
         owner => 'root', group => 'root',
-        source => '/vagrant/puppet/modules/other/templates/httpd.conf',
+        content => template('httpd.conf'),
     }
 }
