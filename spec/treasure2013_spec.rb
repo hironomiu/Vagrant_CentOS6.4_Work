@@ -62,29 +62,47 @@ demouser apache group-a group-b group-c group-d group-e
     end
 end
 
-# ホームディレクトリチェック
+# ホームディレクトリ,.sshディレクトリチェック
 describe user('root') do
     it { should have_home_directory '/root' }
 end
 describe user('demouser') do
     it { should have_home_directory '/home/demouser' }
 end
+describe file('/home/demouser/.ssh') do
+    it { should be_directory }
+end
 describe user('group-a') do
     it { should have_home_directory '/home/group-a' }
+end
+describe file('/home/group-a/.ssh') do
+    it { should be_directory }
 end
 describe user('group-b') do
     it { should have_home_directory '/home/group-b' }
 end
+describe file('/home/group-b/.ssh') do
+    it { should be_directory }
+end
 describe user('group-c') do
     it { should have_home_directory '/home/group-c' }
+end
+describe file('/home/group-c/.ssh') do
+    it { should be_directory }
 end
 describe user('group-d') do
     it { should have_home_directory '/home/group-d' }
 end
+describe file('/home/group-d/.ssh') do
+    it { should be_directory }
+end
 describe user('group-e') do
     it { should have_home_directory '/home/group-e' }
 end
- 
+describe file('/home/group-e/.ssh') do
+    it { should be_directory }
+end
+
 # グループチェック
 describe user('apache') do
     it { should belong_to_group 'apache' }
