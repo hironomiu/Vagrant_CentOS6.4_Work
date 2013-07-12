@@ -79,6 +79,10 @@ Vagrant.configure("2") do |config|
      puppet.manifests_path = "./puppet/modules/mysql/manifests"
      puppet.manifest_file  = "init.pp"
   end
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-vagrant/templates" --execute "include db-vagrant"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-vagrant/manifests"
+     puppet.manifest_file  = "init.pp"
+  end
   config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/php/templates" --execute "include php"' do |puppet|
      puppet.manifests_path = "./puppet/modules/php/manifests"
      puppet.manifest_file  = "init.pp"
