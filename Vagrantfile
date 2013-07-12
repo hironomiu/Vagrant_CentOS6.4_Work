@@ -71,67 +71,67 @@ Vagrant.configure("2") do |config|
   # #               Managed by Puppet.\n"
   # # }
   #
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include base"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/base/templates" --execute "include base"' do |puppet|
      puppet.manifests_path = "./puppet/modules/base/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include mysql"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/mysql/templates" --execute "include mysql"' do |puppet|
      puppet.manifests_path = "./puppet/modules/mysql/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include php"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/php/templates" --execute "include php"' do |puppet|
      puppet.manifests_path = "./puppet/modules/php/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include pear"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/pear/templates" --execute "include pear"' do |puppet|
      puppet.manifests_path = "./puppet/modules/pear/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include testrunner"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/testrunner/templates" --execute "include testrunner"' do |puppet|
      puppet.manifests_path = "./puppet/modules/testrunner/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include demogroup"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/demogroup/templates" --execute "include demogroup"' do |puppet|
      puppet.manifests_path = "./puppet/modules/demogroup/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include demouser"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/demouser/templates" --execute "include demouser"' do |puppet|
      puppet.manifests_path = "./puppet/modules/demouser/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include group-a"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/group-a/templates" --execute "include group-a"' do |puppet|
      puppet.manifests_path = "./puppet/modules/group-a/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include group-b"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/group-b/templates" --execute "include group-b"' do |puppet|
      puppet.manifests_path = "./puppet/modules/group-b/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include group-c"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/group-c/templates" --execute "include group-c"' do |puppet|
      puppet.manifests_path = "./puppet/modules/group-c/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include group-d"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/group-d/templates" --execute "include group-d"' do |puppet|
      puppet.manifests_path = "./puppet/modules/group-d/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include group-e"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/group-e/templates" --execute "include group-e"' do |puppet|
      puppet.manifests_path = "./puppet/modules/group-e/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include httpd"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/httpd/templates" --execute "include httpd"' do |puppet|
      puppet.manifests_path = "./puppet/modules/httpd/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include sshd"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/sshd/templates" --execute "include sshd"' do |puppet|
      puppet.manifests_path = "./puppet/modules/sshd/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include iptables"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/iptables/templates" --execute "include iptables"' do |puppet|
      puppet.manifests_path = "./puppet/modules/iptables/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --execute "include other"' do |puppet|
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/other/templates" --execute "include other"' do |puppet|
      puppet.manifests_path = "./puppet/modules/other/manifests"
      puppet.manifest_file  = "init.pp"
   end
