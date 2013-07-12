@@ -33,7 +33,15 @@ Puppet
 ## 環境破棄
 ### 再構築したい場合は下記コマンドで破棄後構築が可能
     vagrant destroy  
-
+## makeコマンド
+### install
+    vagrant upと同じ
+### destroy
+    vagrant destroyと同じ
+### add-demouser
+    ゲストOSにdemouser用のドキュメントルートの設定、リライトルールの追加
+### test
+    ゲストOSの設定テスト
 ## 環境説明
 ### VirtualBox
 #### インスタンス名
