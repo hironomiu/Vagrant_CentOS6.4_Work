@@ -1,0 +1,2 @@
+class other::install{
+}

@@ -1,0 +1,2 @@
+class group-c::install{
+}

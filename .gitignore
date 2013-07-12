@@ -1,1 +1,3 @@
 .vagrant/machines/default/virtualbox/id
+*.swp
+id_rsa

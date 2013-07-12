@@ -1,0 +1,2 @@
+class pear::config{
+}
