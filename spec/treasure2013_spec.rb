@@ -34,43 +34,63 @@ end
 
 # ホストチェック
 describe host('treasure2013.local') do
-  it { should be_resolvable.by('hosts') }
+    it { should be_resolvable.by('hosts') }
 end
 
 # ポートチェック
 describe port(80) do
-  it { should be_listening }
+    it { should be_listening }
 end
 
 # iptablesチェック
 describe iptables do
-  it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT') }
-  it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18001 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18002 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18003 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18004 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18005 -j ACCEPT') }
 end
 
 # ユーザチェック 
 %w{
-demouser apache
+demouser apache group-a group-b group-c group-d group-e
 }.each do |user|
-  describe user(user) do
-    it { should exist }
-  end
+    describe user(user) do
+        it { should exist }
+    end
 end
 
 # ホームディレクトリチェック
 describe user('root') do
-  it { should have_home_directory '/root' }
+    it { should have_home_directory '/root' }
 end
 describe user('demouser') do
-  it { should have_home_directory '/home/demouser' }
+    it { should have_home_directory '/home/demouser' }
+end
+describe user('group-a') do
+    it { should have_home_directory '/home/group-a' }
+end
+describe user('group-b') do
+    it { should have_home_directory '/home/group-b' }
+end
+describe user('group-c') do
+    it { should have_home_directory '/home/group-c' }
+end
+describe user('group-d') do
+    it { should have_home_directory '/home/group-d' }
+end
+describe user('group-e') do
+    it { should have_home_directory '/home/group-e' }
 end
  
 # グループチェック
 describe user('apache') do
-  it { should belong_to_group 'apache' }
-  it { should belong_to_group 'demogroup' }
+    it { should belong_to_group 'apache' }
+    it { should belong_to_group 'demogroup' }
 end
 describe user('demouser') do
-  it { should belong_to_group 'demogroup' }
+    it { should belong_to_group 'demogroup' }
 end
 
