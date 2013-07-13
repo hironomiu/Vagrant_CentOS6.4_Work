@@ -79,8 +79,32 @@ Vagrant.configure("2") do |config|
      puppet.manifests_path = "./puppet/modules/mysql/manifests"
      puppet.manifest_file  = "init.pp"
   end
-  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-vagrant/templates" --execute "include db-vagrant"' do |puppet|
-     puppet.manifests_path = "./puppet/modules/db-vagrant/manifests"
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-root/templates" --execute "include db-root"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-root/manifests"
+     puppet.manifest_file  = "init.pp"
+  end
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-demouser/templates" --execute "include db-demouser"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-demouser/manifests"
+     puppet.manifest_file  = "init.pp"
+  end
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-group_a/templates" --execute "include db-group_a"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-group_a/manifests"
+     puppet.manifest_file  = "init.pp"
+  end
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-group_b/templates" --execute "include db-group_b"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-group_b/manifests"
+     puppet.manifest_file  = "init.pp"
+  end
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-group_c/templates" --execute "include db-group_c"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-group_c/manifests"
+     puppet.manifest_file  = "init.pp"
+  end
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-group_d/templates" --execute "include db-group_d"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-group_d/manifests"
+     puppet.manifest_file  = "init.pp"
+  end
+  config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/db-group_e/templates" --execute "include db-group_e"' do |puppet|
+     puppet.manifests_path = "./puppet/modules/db-group_e/manifests"
      puppet.manifest_file  = "init.pp"
   end
   config.vm.provision :puppet, :options => '--modulepath="/vagrant/puppet/modules" --templatedir="/vagrant/puppet/modules/php/templates" --execute "include php"' do |puppet|
