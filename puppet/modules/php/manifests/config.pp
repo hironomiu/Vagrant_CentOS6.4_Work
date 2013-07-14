@@ -1,6 +1,6 @@
 class php::config {
     file { '/etc/php.ini':
         owner => 'root', group => 'root',
-        content => template('php.ini'),
+        content => template('php/php.ini'),
     }
 }

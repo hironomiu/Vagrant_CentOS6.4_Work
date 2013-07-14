@@ -1,5 +1,5 @@
 class base::install{
-    yumrepo { 'remi':
+    yumrepo { 'base-remi':
         descr => 'remi repo',
         mirrorlist => 'http://rpms.famillecollet.com/enterprise/6/remi/mirror',
         enabled    => 1,
@@ -17,6 +17,6 @@ class base::install{
         'git',
         ]:
         ensure => installed,
-        require => Yumrepo['remi'],
+        require => Yumrepo['base-remi'],
     }
 }

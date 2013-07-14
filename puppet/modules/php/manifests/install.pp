@@ -1,7 +1,7 @@
 class php::install{
     include mysql::service
     Class['mysql::service'] ~> Class['php::install']
-    yumrepo { 'remi':
+    yumrepo { 'php-remi':
         descr => 'remi repo',
         mirrorlist => 'http://rpms.famillecollet.com/enterprise/6/remi/mirror',
         enabled    => 1,
@@ -25,6 +25,6 @@ class php::install{
         ]:
         provider => 'yum',
         ensure => installed,
-        require => Yumrepo['remi'],
+        require => Yumrepo['php-remi'],
     }
 }

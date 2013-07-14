@@ -1,6 +1,6 @@
 class pear::install{
     include php::service
-    Class['php::service'] ~> Class['pear::install']
+    Class['php::service'] -> Class['pear::install']
 
     exec { "pear" :
         user => 'root',

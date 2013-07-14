@@ -1,6 +1,6 @@
 class testrunner::install{
-    include php::service
-    Class['php::service'] ~> Class['testrunner::install']
+    include pear::install
+    Class['pear::install'] -> Class['testrunner::install']
 
     exec { "testrunner" :
         user => 'root',

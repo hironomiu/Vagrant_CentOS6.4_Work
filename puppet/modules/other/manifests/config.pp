@@ -3,6 +3,6 @@ class other::config{
     Class['httpd::service'] ~> Class['other::config']
     file { '/etc/httpd/conf/httpd.conf':
         owner => 'root', group => 'root',
-        content => template('httpd.conf'),
+        content => template('other/httpd.conf'),
     }
 }

@@ -53,13 +53,20 @@ describe iptables do
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18005 -j ACCEPT') }
 end
 
-# ユーザチェック 
+# ユーザチェック（存在チェック、所属グループチェック）
 %w{
 demouser apache group-a group-b group-c group-d group-e
 }.each do |user|
     describe user(user) do
         it { should exist }
+        it { should belong_to_group 'demogroup' }
     end
+end
+
+# グループチェック（apacheのみ追加でチェック）
+describe user('apache') do
+    it { should belong_to_group 'apache' }
+    it { should belong_to_group 'demogroup' }
 end
 
 # ホームディレクトリ,.sshディレクトリチェック
@@ -103,12 +110,4 @@ describe file('/home/group-e/.ssh') do
     it { should be_directory }
 end
 
-# グループチェック
-describe user('apache') do
-    it { should belong_to_group 'apache' }
-    it { should belong_to_group 'demogroup' }
-end
-describe user('demouser') do
-    it { should belong_to_group 'demogroup' }
-end
 
