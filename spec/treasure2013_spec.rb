@@ -19,7 +19,7 @@ end
 
 # サービスチェック
 %w{
-httpd mysqld iptables
+httpd mysqld sshd iptables
 }.each do |service|
   describe service(service) do
     it { should be_enabled   }
@@ -110,4 +110,30 @@ describe file('/home/group-e/.ssh') do
     it { should be_directory }
 end
 
+# mysql作成DBチェック
+cmds = [
+    {
+        :cmd => 'mysql -ugroup_a -pgroup_apass -e "use group_a;"'
+    },
+    {
+        :cmd => 'mysql -ugroup_b -pgroup_bpass -e "use group_b;"'
+    },
+    {
+        :cmd => 'mysql -ugroup_c -pgroup_cpass -e "use group_c;"'
+    },
+    {
+        :cmd => 'mysql -ugroup_d -pgroup_dpass -e "use group_d;"'
+    },
+    {
+        :cmd => 'mysql -ugroup_e -pgroup_epass -e "use group_e;"'
+    },
+    {
+        :cmd => 'mysql -udemouser -pdemopass -e "use groupwork;"'
+    },
+]
+cmds.each do |mysql_db|
+    describe command(mysql_db[:cmd]) do
+        it { should return_exit_status 0 }
+    end
+end
 
