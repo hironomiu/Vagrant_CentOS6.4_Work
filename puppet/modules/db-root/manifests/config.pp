@@ -1,5 +1,6 @@
 class db-root::config {
-    $passwd = 'vagrant'
+    include variables::init
+    $passwd = $variables::init::passwd
     include mysql::service
     Class['mysql::service'] -> Class['db-root::config']
     exec { "db-set-root-pass":

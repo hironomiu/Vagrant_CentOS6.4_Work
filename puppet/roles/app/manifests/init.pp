@@ -22,5 +22,4 @@ class app {
     include app::sshd
     include app::iptables
     include app::other
-
 }
