@@ -53,61 +53,59 @@ describe iptables do
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18005 -j ACCEPT') }
 end
 
-# ユーザチェック（存在チェック、所属グループチェック）
-%w{
-demouser apache group-a group-b group-c group-d group-e
-}.each do |user|
-    describe user(user) do
-        it { should exist }
-        it { should belong_to_group 'demogroup' }
-    end
-end
-
-# グループチェック（apacheのみ追加でチェック）
+# apacheチェック
 describe user('apache') do
+    it { should exist }
     it { should belong_to_group 'apache' }
     it { should belong_to_group 'demogroup' }
 end
 
+# アプリケーションユーザチェック（存在チェック、所属グループチェック）
 # ホームディレクトリ,.sshディレクトリチェック
+users = [
+    {
+        :user => 'demouser',
+        :home_dir => '/home/demouser',
+        :ssh_dir => '/home/demouser/.ssh',
+    },
+    {
+        :user => 'group-a',
+        :home_dir => '/home/group-a',
+        :ssh_dir => '/home/group-a/.ssh',
+    },
+    {
+        :user => 'group-b',
+        :home_dir => '/home/group-b',
+        :ssh_dir => '/home/group-b/.ssh',
+    },
+    {
+        :user => 'group-c',
+        :home_dir => '/home/group-c',
+        :ssh_dir => '/home/group-c/.ssh',
+    },
+    {
+        :user => 'group-d',
+        :home_dir => '/home/group-d',
+        :ssh_dir => '/home/group-d/.ssh',
+    },
+    {
+        :user => 'group-e',
+        :home_dir => '/home/group-e',
+        :ssh_dir => '/home/group-e/.ssh',
+    },
+]
+users.each do |user|
+    describe user(user[:user]) do
+        it { should exist }
+        it { should belong_to_group 'demogroup' }
+        it { should have_home_directory user[:home_dir] }
+    end
+    describe file(user[:ssh_dir]) do
+        it { should be_directory }
+    end
+end
 describe user('root') do
     it { should have_home_directory '/root' }
-end
-describe user('demouser') do
-    it { should have_home_directory '/home/demouser' }
-end
-describe file('/home/demouser/.ssh') do
-    it { should be_directory }
-end
-describe user('group-a') do
-    it { should have_home_directory '/home/group-a' }
-end
-describe file('/home/group-a/.ssh') do
-    it { should be_directory }
-end
-describe user('group-b') do
-    it { should have_home_directory '/home/group-b' }
-end
-describe file('/home/group-b/.ssh') do
-    it { should be_directory }
-end
-describe user('group-c') do
-    it { should have_home_directory '/home/group-c' }
-end
-describe file('/home/group-c/.ssh') do
-    it { should be_directory }
-end
-describe user('group-d') do
-    it { should have_home_directory '/home/group-d' }
-end
-describe file('/home/group-d/.ssh') do
-    it { should be_directory }
-end
-describe user('group-e') do
-    it { should have_home_directory '/home/group-e' }
-end
-describe file('/home/group-e/.ssh') do
-    it { should be_directory }
 end
 
 # mysql作成DBチェック
