@@ -1,3 +1,6 @@
 .vagrant/machines/default/virtualbox/id
 *.swp
 id_rsa
+groupwork_id_rsa
+groupwork_id_rsa.pub
+
