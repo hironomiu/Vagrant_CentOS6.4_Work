@@ -21,5 +21,5 @@ class app {
     include app::httpd
     include app::sshd
     include app::iptables
-    include app::other
+    include app::httpd-demouser
 }

@@ -1,0 +1,2 @@
+class httpd-demouser::service {
+}
