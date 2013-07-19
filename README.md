@@ -63,7 +63,8 @@ NAT,ssh用にポートフォワーディングの設定あり
 ### ゲストOS
 CentOS6.4
 #### ユーザ
-| OS user | pass | 続DB | 接続Port |  DB user |  DB pass | 用途 | 
+
+| OS user | pass | 続DB | 接続Port |  DB user |  DB pass | 用途 |
 |:-----------:|:------------:|:------------:|:------------:|:------------:|:------------:|
 | root | vagrant | - | 3306 |  root | vagrant | root |
 | vagrant | vagrant | - | - | - | - | vagrant用ユーザ |
