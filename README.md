@@ -21,25 +21,26 @@ Puppet
 （make、serverspecはmacのみ）
 
 ## 構築
+以下については一般ユーザでの構築を想定して記載しています。
 ### 当リポジトリをgit clone後ホストターミナルから
-    cd Vagrant   
-    vagrant up  
+    $ cd Vagrant   
+    $ vagrant up  
 上記でpuppetによるパッケージ、講義用ユーザ（demouser）の作成まで完了する。
 ## ゲストOSへログイン方法
 ### vagrantを利用した方法
-    vagrant ssh
+    $ vagrant ssh
 ### 前半戦用ユーザにsshでログイン（ユーザ、パス共にdemouser）
-    ssh demouser@192.168.56.110
+    $ ssh demouser@192.168.56.110
 ここまで問題無ければ構築完了です。
 ### 停止方法
-    vagrant halt
+    $ vagrant halt
     もしくはVirtualBoxのコンソール画面から停止でも問題ありません。（起動も同様に問題なし）
 ### vagrantコマンドの確認方法
-    vagrant -h
+    $ vagrant -h
 
 ## 環境破棄
 ### 再構築したい場合は下記コマンドで破棄後構築が可能
-    vagrant destroy  
+    $ vagrant destroy  
 ## makeコマンド
 以下はmakeコマンドが実行可能な環境のみ利用可能
 ### install
