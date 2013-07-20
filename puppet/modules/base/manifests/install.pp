@@ -15,6 +15,8 @@ class base::install{
         'unzip',
         'make',
         'git',
+        'java-1.7.0-openjdk',
+        'java-1.7.0-openjdk-devel',
         ]:
         ensure => installed,
         require => Yumrepo['base-remi'],

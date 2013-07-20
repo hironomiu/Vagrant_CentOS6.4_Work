@@ -4,8 +4,9 @@ class testrunner::install{
 
     exec { "testrunner" :
         user => 'root',
-        path => ['/usr/bin'],
+        path => ['/usr/bin','/bin'],
         command => "pear channel-discover pear.piece-framework.com",
+        unless => "pear list-channels | grep pear.piece-framework.com",
         timeout => 999,
     }
 
@@ -13,7 +14,8 @@ class testrunner::install{
         user => 'root',
         path => ['/usr/bin'],
         command => "pear install piece/stagehand_testrunner",
+        unless => "pear info piece/stagehand_testrunner",
         timeout => 999,
-        require => [Exec['testrunner']],
+        require => Exec['testrunner'],
     }
 }

@@ -1,6 +1,7 @@
 class app {
     include app::base
     include app::mysql
+    include app::jenkins
     include app::db-root
     include app::db-demouser
     include app::db-group_a

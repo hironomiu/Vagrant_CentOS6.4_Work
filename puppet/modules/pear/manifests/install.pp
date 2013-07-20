@@ -5,49 +5,28 @@ class pear::install{
     exec { "pear" :
         user => 'root',
         cwd => '/',
-        path => ['/usr/bin'],
-        command => "pear channel-discover pear.phpunit.de",
+        path => ['/usr/bin','/bin'],
+        command => "pear config-set auto_discover 1 system",
+        unless => "pear config-get auto_discover system | grep 1",
     }
 
-    exec { "pear 2" :
+    exec {"pear-phpunit":
         user => 'root',
         cwd => '/',
         path => ['/usr/bin'],
-        command => "pear channel-discover components.ez.no",
-        require => Exec['pear']
-    }
-
-    exec { "pear 3" :
-        user => 'root',
-        cwd => '/',
-        path => ['/usr/bin'],
-        command => "pear channel-discover pear.symfony-project.com",
-        require => Exec['pear 2']
-    }
-
-    exec { "pear 4" :
-        user => 'root',
-        cwd => '/',
-        path => ['/usr/bin'],
-        command => "pear channel-discover pear.symfony.com",
-        require => Exec['pear 3']
-    }
-
-    exec { "pear 5" :
-        user => 'root',
-        cwd => '/',
-        path => ['/usr/bin'],
-        command => "pear install channel://pear.symfony.com/Yaml",
+        command => "pear install --alldeps pear.phpunit.de/PHPUnit",
+        unless => "pear info pear.phpunit.de/PHPUnit",
         timeout => 999,
-        require => Exec['pear 4']
+        require => Exec['pear'],
     }
 
-    exec {"pear install phpunit":
+    exec {"pear-phing":
         user => 'root',
         cwd => '/',
         path => ['/usr/bin'],
-        command => "/usr/bin/pear install phpunit/PHPUnit",
+        command => "pear install pear.phing.info/phing",
+        unless => "pear info pear.phing.info/phing",
         timeout => 999,
-        require => Exec['pear 5'],
+        require => Exec['pear-phpunit'],
     }
 }
