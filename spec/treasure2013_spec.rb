@@ -10,7 +10,7 @@ end
 %w{
 openssh-clients wget screen unzip make git php php-cli
 php-pecl-apc php-common php-devel php-gd php-pdo php-pear php-xml
-php-mbstring php-mysql mysql mysql-server mysql-devel httpd
+php-mbstring php-mysql mysql mysql-server mysql-devel httpd jenkins java-1.7.0-openjdk java-1.7.0-openjdk-devel
 }.each do |pkg|
   describe package(pkg) do
     it { should be_installed }
@@ -19,7 +19,7 @@ end
 
 # サービスチェック
 %w{
-httpd mysqld sshd iptables
+httpd mysqld sshd iptables jenkins
 }.each do |service|
   describe service(service) do
     it { should be_enabled   }
@@ -46,6 +46,7 @@ end
 describe iptables do
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT') }
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT') }
+    it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT') }
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18001 -j ACCEPT') }
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18002 -j ACCEPT') }
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18003 -j ACCEPT') }
@@ -60,6 +61,15 @@ describe user('apache') do
     it { should belong_to_group 'demogroup' }
 end
 
+# jenkinsチェック
+describe user('jenkins') do
+    it { should exist }
+    it { should belong_to_group 'jenkins' }
+    it { should have_home_directory '/var/lib/jenkins' }
+end
+describe file('/var/lib/jenkins/.ssh') do
+    it { should be_directory }
+end
 # アプリケーションユーザチェック（存在チェック、所属グループチェック）
 # ホームディレクトリ,.sshディレクトリチェック
 users = [
