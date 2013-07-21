@@ -1,3 +1,3 @@
-class CI::testrunner {
+class ci::testrunner {
     include ::testrunner
 }

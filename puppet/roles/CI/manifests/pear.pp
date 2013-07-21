@@ -1,3 +1,3 @@
-class CI::pear {
+class ci::pear {
     include ::pear
 }

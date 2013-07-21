@@ -1,7 +1,7 @@
-class CI {
-    include CI::base
-    include CI::jenkins
-    include CI::php
-    include CI::pear
-    include CI::testrunner
+class ci {
+    include ci::base
+    include ci::jenkins
+    include ci::php
+    include ci::pear
+    include ci::testrunner
 }

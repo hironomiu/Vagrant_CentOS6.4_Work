@@ -1,3 +1,3 @@
-class CI::base {
+class ci::base {
     include ::base
 }

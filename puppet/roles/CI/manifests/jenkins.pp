@@ -1,3 +1,3 @@
-class CI::jenkins {
+class ci::jenkins {
     include ::jenkins
 }

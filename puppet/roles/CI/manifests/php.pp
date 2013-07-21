@@ -1,3 +1,3 @@
-class CI::php {
+class ci::php {
     include ::php
 }
