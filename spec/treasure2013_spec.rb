@@ -60,6 +60,9 @@ describe user('mysql') do
     it { should belong_to_group 'mysql' }
     it { should have_home_directory '/var/lib/mysql' }
 end
+describe file('/var/lib/mysql/my.cnf') do
+    it { should be_file }
+end
 
 # apacheチェック
 describe user('apache') do
