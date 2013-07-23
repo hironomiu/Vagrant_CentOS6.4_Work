@@ -54,6 +54,13 @@ describe iptables do
     it { should have_rule('-A INPUT -p tcp -m state --state NEW -m tcp --dport 18005 -j ACCEPT') }
 end
 
+# mysqlチェック
+describe user('mysql') do
+    it { should exist }
+    it { should belong_to_group 'mysql' }
+    it { should have_home_directory '/var/lib/mysql' }
+end
+
 # apacheチェック
 describe user('apache') do
     it { should exist }
