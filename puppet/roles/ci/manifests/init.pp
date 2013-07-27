@@ -1,4 +1,5 @@
 class ci {
+    include ci::localtime
     include ci::lang
     include ci::base
     include ci::jenkins
