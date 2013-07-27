@@ -1,4 +1,5 @@
 class app {
+    include app::lang
     include app::base
     include app::mysql
     include app::jenkins
