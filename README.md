@@ -70,11 +70,11 @@ CentOS6.4
 | root | vagrant | - | 3306 |  root | vagrant | root |
 | vagrant | vagrant | - | - | - | - | vagrant用ユーザ |
 | demouser | demouser | groupwork | 3306 | demouser | demopass | 前半戦開発用ユーザ |
-| group-a | group-a | group_a | 3306 | group_a | group_a | 後半戦開発用ユーザ |
-| group-b | group-b | group_b | 3306 | group_b | group_b | 後半戦開発用ユーザ |
-| group-c | group-c | group_c | 3306 | group_c | group_c | 後半戦開発用ユーザ |
-| group-d | group-d | group_d | 3306 | group_d | group_d | 後半戦開発用ユーザ |
-| group-e | group-e | group_e | 3306 | group_e | group_e | 後半戦開発用ユーザ |
+| group-a | group-a | group_a | 3306 | group_a | group_apass | 後半戦開発用ユーザ |
+| group-b | group-b | group_b | 3306 | group_b | group_bpass | 後半戦開発用ユーザ |
+| group-c | group-c | group_c | 3306 | group_c | group_cpass | 後半戦開発用ユーザ |
+| group-d | group-d | group_d | 3306 | group_d | group_dpass | 後半戦開発用ユーザ |
+| group-e | group-e | group_e | 3306 | group_e | group_epass | 後半戦開発用ユーザ |
 
 #### パッケージ   
 ##### mysql
