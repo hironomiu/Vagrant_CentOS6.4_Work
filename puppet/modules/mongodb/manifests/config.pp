@@ -1,0 +1,2 @@
+class mongodb::config {
+}

@@ -1,0 +1,2 @@
+class pecl::config{
+}
