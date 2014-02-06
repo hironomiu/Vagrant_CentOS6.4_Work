@@ -7,7 +7,7 @@ class pecl::install{
         cwd => '/',
         path => ['/usr/bin','/bin'],
         command => "pecl install mongo",
-        unless => "pecl list  mongo | grep mongo",
+        onlyif => "pecl list  mongo | grep 'not installed'",
     }
 
 }
